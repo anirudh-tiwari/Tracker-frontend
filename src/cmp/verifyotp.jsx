@@ -1,32 +1,51 @@
 import React, { Component } from "react";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Cookies from 'js-cookie';
 import { navigate } from "@reach/router";
 
-export default class Register extends Component {
+
+export default class Verifyotp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mobile_number: "",
-            Role: props.role,
+            otp: "",
+            mobile_number: null,
+            hash: null,
+            role: null,
+            accessToken: Cookies.get('accessToken'),
         };
         this.handleSubmit = (event) => {
             event.preventDefault();
             const data = {
                 mobile_number: this.state.mobile_number,
+                hash: this.state.hash,
+                otp: this.state.otp,
+                role: this.state.role,
             };
-            fetch('/otp/send', {
+            console.log(data)
+            fetch('/otp/verify', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             }).then((result) => {
                 result.json().then((resp) => {
-                    console.log(resp.mobile_number);
-                    navigate("/verifyotp", { state: { mobile_data: resp.mobile_number, hash: resp.hash, role: this.state.Role } });
+                    console.log(resp);
+                    navigate("/shopdetail");
                 })
             })
         }
     }
+    componentDidMount() {
+        if (this.props.location) {
+            this.setState({
+                mobile_number: this.props.location.state.mobile_data,
+                hash: this.props.location.state.hash,
+                role: this.props.location.state.role,
+            })
+        }
+    }
+
     render() {
         return (
             <div className="outer" >
@@ -35,9 +54,9 @@ export default class Register extends Component {
                         <h3>Register</h3>
 
                         <div class="form-group  ">
-                            <label for="name">MobileNumber :</label>
+                            <label for="name">OTP :</label>
                             <input type="text" id="name" onChange={(e) => {
-                                this.setState({ mobile_number: e.target.value });
+                                this.setState({ otp: e.target.value });
                             }}
                                 class="form-control " placeholder="Mobile Number " />
                         </div>
@@ -50,4 +69,4 @@ export default class Register extends Component {
             </div >
         );
     }
-}
+}    

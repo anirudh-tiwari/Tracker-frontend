@@ -1,6 +1,11 @@
 // import './App.css';
 import { Router } from "@reach/router"
-import Register from './cmp/Register';
+import ShopDetail from './cmp/ShopDetail';
+import RegisterShop from './cmp/RegisterShop';
+import RegisterCustomer from './cmp/RegisterCustomer';
+import Register from './cmp/register';
+import Verifyotp from './cmp/verifyotp';
+import ProductDetail from './cmp/productdetail';
 
 function App() {
   return (
@@ -8,7 +13,12 @@ function App() {
 
       <Router>
 
-        <Register path="/register" />
+        <ShopDetail path="/shopdetail" />
+        <RegisterShop path="/registershop" />
+        <RegisterCustomer path="/registercustomer" />
+        <Register path="/" />
+        <Verifyotp path="/verifyotp" />
+        <ProductDetail path="/productdetail" />
       </Router>
     </div>
   );
