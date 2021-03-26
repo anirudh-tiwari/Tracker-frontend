@@ -18,7 +18,7 @@ export default class ProductDetail extends Component {
                 image: this.state.image,
                 shop_id: this.state.shop_id,
             };
-            fetch('http://localhost:8000/api/create', {
+            fetch('product/create', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

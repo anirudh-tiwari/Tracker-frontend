@@ -6,6 +6,9 @@ import RegisterCustomer from './cmp/RegisterCustomer';
 import Register from './cmp/register';
 import Verifyotp from './cmp/verifyotp';
 import ProductDetail from './cmp/productdetail';
+import StepsDetail from './cmp/StepsDetail';
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
         <Register path="/" />
         <Verifyotp path="/verifyotp" />
         <ProductDetail path="/productdetail" />
+        <StepsDetail path="/stepsdetail" />
       </Router>
     </div>
   );
