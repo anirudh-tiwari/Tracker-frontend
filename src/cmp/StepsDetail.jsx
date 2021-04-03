@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 // import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +20,7 @@ export default class StepsDetail extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { values: [] };
+        this.state = { values: [''], product_id: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -27,7 +28,7 @@ export default class StepsDetail extends React.Component {
         return this.state.values.map((el, i) =>
             <div key={i}>
                 {/* <input type="text" value={el || ''} onChange={this.handleChange.bind(this, i)} /> */}
-                <TextField id="AddSteps" label="Add Steps" value={el || ''} onChange={this.handleChange.bind(this, i)} />
+                <TextField id="AddSteps" label={`Step ${i + 1}`} value={el || ''} className="m-1" onChange={this.handleChange.bind(this, i)} />
                 {/* <input type='button' value='remove' onClick={this.removeClick.bind(this, i)} /> */}
                 {/* <IconButton >
                     <RemoveIcon />
@@ -35,8 +36,8 @@ export default class StepsDetail extends React.Component {
                 <IconButton >
                 
             </IconButton> */}
-                <AddIcon onClick={this.addClick.bind(this)} />
-                <RemoveIcon onClick={this.removeClick.bind(this, i)} />
+                <AddIcon className="m-1" onClick={this.addClick.bind(this)} />
+                <RemoveIcon className="m-1 " onClick={this.removeClick.bind(this, i)} />
             </div>
         )
     }
@@ -62,6 +63,13 @@ export default class StepsDetail extends React.Component {
         event.preventDefault();
     }
 
+    componentDidMount() {
+        if (this.props.location) {
+            this.setState({
+                product_id: this.props.location.state.ProductDetailId,
+            })
+        }
+    }
     render() {
         return (
             <div className="outer" >
@@ -69,13 +77,14 @@ export default class StepsDetail extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <h3>Steps</h3>
                         {this.createUI()}
-                        <input type='button' value='Add Steps' onClick={this.addClick.bind(this)} />
+                        {/* <input type='button' value='Add Steps' onClick={this.addClick.bind(this)} /> */}
                         {/* <input type="submit" value="Submit" /> */}
                         <Button
                             variant="contained"
                             color="primary"
-                            // className={classes.button}
+                            className="m-2"
                             endIcon={<Icon>send</Icon>}
+                            onClick={this.handleSubmit}
                         >
                             Send
                         </Button>

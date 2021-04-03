@@ -1,5 +1,4 @@
-// import './App.css';
-import { Router } from "@reach/router"
+import { Route, Switch } from 'react-router-dom';
 import ShopDetail from './cmp/ShopDetail';
 import RegisterShop from './cmp/RegisterShop';
 import RegisterCustomer from './cmp/RegisterCustomer';
@@ -13,17 +12,15 @@ import 'devextreme/dist/css/dx.light.css';
 function App() {
   return (
     <div >
-
-      <Router>
-
-        <ShopDetail path="/shopdetail" />
-        <RegisterShop path="/registershop" />
-        <RegisterCustomer path="/registercustomer" />
-        <Register path="/" />
-        <Verifyotp path="/verifyotp" />
-        <ProductDetail path="/productdetail" />
-        <StepsDetail path="/stepsdetail" />
-      </Router>
+      <Switch>
+        <Route path="/" component={Register} exact />
+        <Route path="/shopdetail" component={ShopDetail} />
+        <Route path="/registershop" component={RegisterShop} />
+        <Route path="/registercustomer" component={RegisterCustomer} />
+        <Route path="/verifyotp" component={Verifyotp} />
+        <Route path="/productdetail" component={ProductDetail} />
+        <Route path="/stepsdetail" component={StepsDetail} />
+      </Switch>
     </div>
   );
 }

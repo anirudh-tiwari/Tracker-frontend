@@ -3,12 +3,13 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './register';
 
-export default class RegisterShop extends Component {
-    render() {
-        return (
-            <>
-                <Register role="Shop" />
-            </>
-        );
-    }
+const RegisterShop = () => {
+    return (
+        <>
+            <Register role="Shop" />
+        </>
+    )
+
 }
+
+export default RegisterShop
